@@ -1,3 +1,4 @@
+from typing import Union
 from pydantic import BaseModel
 
 class LoginBase(BaseModel):
@@ -11,3 +12,9 @@ class LoginResponse(BaseModel):
     token: str
     role: str
     userId: str
+
+class Claims(BaseModel):
+    sub: str
+    exp: Union[int, None]
+    email: Union[str, None]
+    scopes: list[str]
