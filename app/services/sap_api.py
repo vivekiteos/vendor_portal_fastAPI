@@ -1,9 +1,9 @@
 import requests
 
-LOGIN_API_URL ='http://srv-sa9-1.idesaccess.com:8000/sap/bc/zsicf_vs_login?sap-client=800'
-OPEN_PO_API_URL='http://srv-sa9-1.idesaccess.com:8000/sap/bc/zpn97_test?sap-client=800'
-GET_ASN_API_URL='http://srv-sa9-1.idesaccess.com:8000/sap/bc/zsicf_vs_asnget?sap-client=800'
-CREATE_ASN_API_URL='http://srv-sa9-1.idesaccess.com:8000/sap/bc/zsicf_vs_asn_c?sap-client=800'
+LOGIN_API_URL ='http://195.234.214.189:8000/sap/bc/zsicf_vs_login?sap-client=800'
+OPEN_PO_API_URL='http://195.234.214.189:8000/sap/bc/zpn97_test?sap-client=800'
+GET_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asnget?sap-client=800'
+CREATE_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asn_c?sap-client=800'
 
 SAP_AUTH_USER_ID ='user07'
 SAP_AUTH_PASS ='MSPG$2024'

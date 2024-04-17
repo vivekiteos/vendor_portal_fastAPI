@@ -6,7 +6,8 @@ from app.routers import (
     user,
     auth,
     po,
-    asn
+    asn,
+    issue
 )
 
 app = FastAPI()
@@ -39,6 +40,10 @@ routes.include_router(
 
 routes.include_router(
     asn.router,prefix="/asn",tags=["ASN"]
+)
+
+routes.include_router(
+    issue.router,prefix="/issue",tags=["ISSUE"]
 )
 
 app.include_router(routes)
