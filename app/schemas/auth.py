@@ -12,6 +12,8 @@ class LoginResponse(BaseModel):
     token: str
     role: str
     userId: str
+    name: str
+    city: str
 
 class Claims(BaseModel):
     sub: str

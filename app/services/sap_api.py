@@ -6,7 +6,7 @@ GET_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asnget?sap-client=8
 CREATE_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asn_c?sap-client=800'
 
 SAP_AUTH_USER_ID ='user07'
-SAP_AUTH_PASS ='MSPG$2024'
+SAP_AUTH_PASS ='MSPG%2024'
 
 def call_Login_api(userId):
     print(userId)
@@ -49,7 +49,6 @@ def call_get_asn_api(asn_id):
         return {"error": str(e)}
     
 def call_create_asn_api(createASN):
-    print(createASN)
     auth = (SAP_AUTH_USER_ID, SAP_AUTH_PASS)
     try:
         response = requests.post(CREATE_ASN_API_URL, auth=auth, json=createASN)

@@ -81,6 +81,8 @@ def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session
         return LoginResponse(
             token= service_auth.create_access_token(db_user, form_data.scopes),
             role=response['data'][0]['role'],
-            userId=response['data'][0]['id']
+            userId=response['data'][0]['id'],
+            name=response['data'][0]['name'],
+            city=response['data'][0]['city']
         )
     
