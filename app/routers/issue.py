@@ -8,13 +8,13 @@ from app.services import issue as service_issue
 router = APIRouter()
 
 @router.post("", response_model=Issue)
-def create_user(issue: IssueCreate, db: Session = Depends(get_db)):
+def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
     userId ="USER07"
     return service_issue.create_issue(db, issue, userId)
 
 
 @router.get("", response_model=IssueList)
-def create_user(db: Session = Depends(get_db)):
+def get_issue(db: Session = Depends(get_db)):
     userId ="USER07"
     issue_list = service_issue.get_issue_by_user_id(db, userId)
     return issue_list

@@ -12,6 +12,10 @@ def get_asn(asn_id: str):
 
 
 @router.post("")
-def auth(createASN: CreateASN, db: Session = Depends(get_db)):
+def create_asn(createASN: CreateASN, db: Session = Depends(get_db)):
+    return service_asn.create_asn(createASN)
+
+@router.post("")
+def po_to_asn(createASN: CreateASN, db: Session = Depends(get_db)):
     return service_asn.create_asn(createASN)
     
