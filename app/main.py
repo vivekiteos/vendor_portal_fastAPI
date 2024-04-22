@@ -13,7 +13,7 @@ from app.routers import (
 app = FastAPI()
 
 origins =[
-    "http://localhost:5173"
+    "http://182.16.16.24:8089"
 ]
 
 app.add_middleware(
