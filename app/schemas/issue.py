@@ -14,7 +14,6 @@ class IssueBase(BaseModel):
     issue_title: str
     issue_desc: str
     submit_type: str
-    status: str
 
 
 class IssueCreate(IssueBase):
