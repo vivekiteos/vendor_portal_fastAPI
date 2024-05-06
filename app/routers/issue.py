@@ -21,7 +21,7 @@ def close_issue(issueId: int, db: Session = Depends(get_db)):
 @router.post("/comments")
 def add_comment(issueId: int, comment: str, db: Session = Depends(get_db)):
     userId ="USER07"
-    return service_issue.add_comment(db, issueId, userId)
+    return service_issue.add_comment(db, issueId,comment, userId)
 
 
 @router.get("/comments")
