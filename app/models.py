@@ -43,6 +43,7 @@ class Issue(Base):
     issue_title= Column(String())
     issue_desc= Column(String())
     submit_type=Column(String())
+    status=Column(String())
     created_date = Column(Date(), default=func.now())
 
 

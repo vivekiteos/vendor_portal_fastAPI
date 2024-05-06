@@ -6,8 +6,6 @@ from app.internal import security
 from app.services.common import generate_random_issue_no
 
 def create_issue(db: Session, issue: IssueCreate, userId: str):
-    # issue_date = datetime.strptime(issue.issue_date, "%d/%m/%Y").date()
-    # action_date = datetime.strptime(issue.action_date, "%d/%m/%Y").date()
     db_issue = models.Issue(
         issue_no = generate_random_issue_no(),
         userId= userId,
