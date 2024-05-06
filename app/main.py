@@ -26,6 +26,7 @@ app.add_middleware(
 )
 
 routes = APIRouter()
+auth_routes = APIRouter(dependencies=[Depends(auth.authorized_user)])
 
 routes.include_router(
     auth.router,prefix="/auth",tags=["Auth"]
@@ -35,16 +36,17 @@ routes.include_router(
     user.router,prefix="/user",tags=["User"]
 )
 
-routes.include_router(
+auth_routes.include_router(
     po.router,prefix="/po",tags=["PO"]
 )
 
-routes.include_router(
+auth_routes.include_router(
     asn.router,prefix="/asn",tags=["ASN"]
 )
 
-routes.include_router(
+auth_routes.include_router(
     issue.router,prefix="/issue",tags=["ISSUE"]
 )
 
 app.include_router(routes)
+app.include_router(auth_routes)
