@@ -17,6 +17,8 @@ def create_access_token(user: User, scopes: list[str]):
         ).model_dump()
     )
 
+def decode_access_token(token: str) -> Claims:
+    return Claims(**security.decode_token(token))
 
 def authenticate(db: Session, username: str, password: str):
     user = get_user(db,username)

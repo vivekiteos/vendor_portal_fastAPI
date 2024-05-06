@@ -36,17 +36,17 @@ routes.include_router(
     user.router,prefix="/user",tags=["User"]
 )
 
-auth_routes.include_router(
+routes.include_router(
     po.router,prefix="/po",tags=["PO"]
 )
 
-auth_routes.include_router(
+routes.include_router(
     asn.router,prefix="/asn",tags=["ASN"]
 )
 
-auth_routes.include_router(
+routes.include_router(
     issue.router,prefix="/issue",tags=["ISSUE"]
 )
 
 app.include_router(routes)
-app.include_router(auth_routes)
+# app.include_router(auth_routes)

@@ -43,7 +43,7 @@ def authorized_user(
     db: Session = Depends(get_db),
 ) -> User:
     try:
-        claims = auth.decode_access_token(token)
+        claims = service_auth.decode_access_token(token)
     except Exception as e:
         raise_authentication_exception(
             required_scopes, detail=f"JWT error: {e}"
