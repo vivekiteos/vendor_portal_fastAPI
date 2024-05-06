@@ -13,14 +13,13 @@ from app.schemas.auth import Login, LoginResponse
 from app.schemas.user import User
 from app.services import auth as service_auth, user as service_users
 from app.services.opa import OpaInput
+from app.config import settings
 
 router = APIRouter()
 
 oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl= "auth",
-    scopes={
-        "me":"Read and write access to user's data"
-    },
+    tokenUrl= settings.TOKEN_URL,
+    scopes= settings.SCOPES,
 )
 
 def raise_authentication_exception(required_scopes, detail):
@@ -43,7 +42,9 @@ def authorized_user(
     db: Session = Depends(get_db),
 ) -> User:
     try:
+        print(token)
         claims = service_auth.decode_access_token(token)
+        
     except Exception as e:
         raise_authentication_exception(
             required_scopes, detail=f"JWT error: {e}"
@@ -79,10 +80,11 @@ def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session
     response = service_auth.authenticate(db, form_data.username, form_data.password)
     if response:
         return LoginResponse(
-            token= service_auth.create_access_token(db_user, form_data.scopes),
+            token= service_auth.create_access_token(db_user, response['data'][0]['email'], form_data.scopes),
             role=response['data'][0]['role'],
             userId=response['data'][0]['id'],
             name=response['data'][0]['name'],
-            city=response['data'][0]['city']
+            city=response['data'][0]['city'],
+            email=response['data'][0]['email']
         )
     

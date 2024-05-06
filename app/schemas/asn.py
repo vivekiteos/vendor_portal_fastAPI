@@ -13,7 +13,34 @@ class Item(BaseModel):
     NETPR: int
     MENE1: int
     MAKTX: str
+    DEL_QTY: str
 
 
 class CreateASN(BaseModel):
     data: List[Item]
+
+
+class ASNItem(BaseModel):
+    LIFNR: str
+    EBELN: str
+    EBELP: int
+    MENGE: int
+    MATNR: str
+    EINDT: str
+    NETPR: int
+    MENE1: int
+    MAKTX: str
+    ETA: str
+    ETD: str
+
+class SubmitASN(BaseModel):
+    invoice: str
+    data: List[ASNItem]
+
+class PostASN(BaseModel):
+    invoice_no: str
+    invoice_value: str
+    id: int
+    eta: str
+    etd: str
+    del_qty: str

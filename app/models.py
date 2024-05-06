@@ -9,6 +9,25 @@ class User(Base):
     password = Column(String())
 
 
+class ASN(Base):
+    __tablename__ = "asn"
+    id = Column(Integer(), primary_key=True)
+    userId = Column(String())
+    po_no = Column(String())
+    mat_code = Column(String())
+    mat_desc = Column(String())
+    item_no = Column(String())
+    open_qty = Column(String())
+    del_qty = Column(String())
+    price = Column(String())
+    inv_no = Column(String())
+    inv_value = Column(String())
+    asn_no = Column(String())
+    status = Column(String())
+    eta = Column(String())
+    etd = Column(String())
+    created_date = Column(Date(), default=func.now())
+
 class Issue(Base):
     __tablename__ = "issue"
     id = Column(Integer(), primary_key=True)
@@ -24,6 +43,15 @@ class Issue(Base):
     issue_title= Column(String())
     issue_desc= Column(String())
     submit_type=Column(String())
+    created_date = Column(Date(), default=func.now())
+
+
+class IssueComments(Base):
+    __tablename__ = "issue_comments"
+    id = Column(Integer(), primary_key=True)
+    userId = Column(String())
+    issueId = Column(Integer())
+    comments = Column(String())
     created_date = Column(Date(), default=func.now())
 
 

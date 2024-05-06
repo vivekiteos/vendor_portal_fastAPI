@@ -14,6 +14,7 @@ class LoginResponse(BaseModel):
     userId: str
     name: str
     city: str
+    email: str
 
 class Claims(BaseModel):
     sub: str

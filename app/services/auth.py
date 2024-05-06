@@ -9,11 +9,11 @@ from app.services import user as service_users
 from app.config import settings
 
 
-def create_access_token(user: User, scopes: list[str]):
-    exp= int(time.time() + settings.JWT_EXPIRY_MINUTES * 60)
+def create_access_token(user: User, email: str, scopes: list[str]):
+    exp= int(time.time() + settings.JWT_EXPIRY_MINUTES * 120)
     return security.create_token(
         Claims(
-            sub=str(user.userId), email="",exp=exp,scopes=scopes
+            sub=str(user.userId), email=email, exp=exp, scopes=scopes
         ).model_dump()
     )
 

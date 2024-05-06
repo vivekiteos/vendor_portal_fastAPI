@@ -21,6 +21,7 @@ def create_issue(db: Session, issue: IssueCreate, userId: str):
         issue_title= issue.issue_title,
         issue_desc= issue.issue_desc,
         submit_type= issue.submit_type,
+        status= "pending"
     )
     db.add(db_issue)
     db.flush()
@@ -32,3 +33,31 @@ def get_issue_by_user_id(db: Session, userId: str):
     return db.query(models.Issue).filter(
         models.Issue.userId == userId
     ).all()
+
+def close_issue(db: Session, issueId: int, userId: str):
+    issue = db.query(models.Issue).filter(
+        models.Issue.id == issueId
+    ).first()
+    if(issueId != None):
+        issue.status ="closed"
+        db.commit()
+        db.refresh(issue)
+
+
+def get_issue_comments(db: Session, issueId: int):
+    return db.query(models.Issue).filter(
+        models.Issue.id == issueId
+    ).all()
+
+
+def add_comment(db: Session, issueId: int, comment: str, userId: str):
+    db_issue = models.IssueComments(
+        userId= userId,
+        issueId= issueId,
+        comment= comment
+    )
+    db.add(db_issue)
+    db.flush()
+    db.refresh(db_issue)
+    db.commit()
+    return db_issue
