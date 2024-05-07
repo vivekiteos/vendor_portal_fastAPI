@@ -42,9 +42,7 @@ def authorized_user(
     db: Session = Depends(get_db),
 ) -> User:
     try:
-        print(token)
         claims = service_auth.decode_access_token(token)
-        
     except Exception as e:
         raise_authentication_exception(
             required_scopes, detail=f"JWT error: {e}"
@@ -57,19 +55,19 @@ def authorized_user(
         raise_authentication_exception(
             required_scopes, detail="Not enough permissions (scope)."
         )
-    user = service_users.get_user_by_user_id(db, user_id=claims.sub)
+    user = service_users.get_user_by_user_id(db, userId=claims.sub)
     if not user:
         raise_authentication_exception(
             required_scopes, detail="Could not validate credentials."
         )
-    if not auth.opa_check(
-        OpaInput(
-            method=req.method, path=req.url.path.split("/")[1:], claims=claims
-        )
-    ):
-        raise_authentication_exception(
-            required_scopes, detail="Not enough permissions (policy)."
-        )
+    # if not auth.opa_check(
+    #     OpaInput(
+    #         method=req.method, path=req.url.path.split("/")[1:], claims=claims
+    #     )
+    # ):
+    #     raise_authentication_exception(
+    #         required_scopes, detail="Not enough permissions (policy)."
+    #     )
     return user
 
 @router.post("")
@@ -80,7 +78,7 @@ def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session
     response = service_auth.authenticate(db, form_data.username, form_data.password)
     if response:
         return LoginResponse(
-            token= service_auth.create_access_token(db_user, response['data'][0]['email'], form_data.scopes),
+            access_token= service_auth.create_access_token(db_user, response['data'][0]['email'], form_data.scopes),
             role=response['data'][0]['role'],
             userId=response['data'][0]['id'],
             name=response['data'][0]['name'],

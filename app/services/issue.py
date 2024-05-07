@@ -44,7 +44,7 @@ def close_issue(db: Session, issueId: int, userId: str):
 
 def get_issue_comments(db: Session, issueId: int):
     return db.query(models.IssueComments).filter(
-        models.IssueComments.id == issueId
+        models.IssueComments.issueId == issueId
     ).all()
 
 

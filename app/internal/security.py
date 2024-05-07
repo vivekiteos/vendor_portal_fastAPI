@@ -20,6 +20,5 @@ def create_token(claims: dict):
 
 
 def decode_token(token: str):
-    print(jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM]))
     return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
 

@@ -9,7 +9,7 @@ class Login(LoginBase):
     pass
 
 class LoginResponse(BaseModel):
-    token: str
+    access_token: str
     role: str
     userId: str
     name: str
