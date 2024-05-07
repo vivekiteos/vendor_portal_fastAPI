@@ -14,6 +14,9 @@ class Item(BaseModel):
     MENE1: int
     MAKTX: str
     DEL_QTY: str
+    plant_code: str
+    vendor_code: str
+    vendor_name: str
 
 
 class CreateASN(BaseModel):

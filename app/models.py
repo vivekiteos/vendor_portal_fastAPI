@@ -26,6 +26,9 @@ class ASN(Base):
     status = Column(String())
     eta = Column(String())
     etd = Column(String())
+    plant_code = Column(String())
+    vendor_name = Column(String())
+    vendor_code = Column(String())
     created_date = Column(Date(), default=func.now())
 
 class Issue(Base):

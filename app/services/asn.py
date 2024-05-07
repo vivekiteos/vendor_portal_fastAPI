@@ -25,7 +25,10 @@ def po_to_asn(db: Session, createASN, userId:str):
             open_qty= asn.MENGE,
             del_qty= asn.DEL_QTY,
             price=asn.NETPR,
-            status ="pending"
+            status ="pending",
+            plant_code = asn.plant_code,
+            vendor_name= asn.vendor_name,
+            vendor_code= asn.vendor_code
         )
         db.add(create_asn)
         db.flush()
