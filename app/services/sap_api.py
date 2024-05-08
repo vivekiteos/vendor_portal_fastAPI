@@ -35,6 +35,15 @@ def call_open_po_api(vendor_id):
         return response.json()
     except requests.exceptions.RequestException as e:
         return {"error": str(e)}
+
+def call_open_po__buyer_api():
+    auth = (SAP_AUTH_USER_ID, SAP_AUTH_PASS)
+    try:
+        response = requests.get(OPEN_PO_API_URL, auth=auth)
+        response.raise_for_status() 
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        return {"error": str(e)}
     
 def call_get_asn_api(asn_id):
     auth = (SAP_AUTH_USER_ID, SAP_AUTH_PASS)

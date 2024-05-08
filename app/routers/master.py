@@ -30,3 +30,12 @@ def ref_grn_no():
         {"id": "3", "name": "REF 3"}
     ]
     return ref_grn_no
+
+@router.get("/vendor")
+def vendor():
+    vendor = [
+        {"id": "1", "name": "vendor 1"},
+        {"id": "2", "name": "vendor 2"},
+        {"id": "3", "name": "vendor 3"}
+    ]
+    return vendor

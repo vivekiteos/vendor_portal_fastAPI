@@ -2,10 +2,17 @@ from app.services import sap_api as sap
 from app import models
 from sqlalchemy.orm import Session
 
+from app.services.common import generate_random_tracking_no
+
 def get_asn(asn_id):
     return sap.call_get_asn_api(asn_id)
 
-def get_all_asn(db):
+def get_all_asn(db, userId):
+    return db.query(models.ASN).filter(
+        models.ASN.userId == userId
+    ).all()
+
+def get_all_asn_buyer(db):
     return db.query(models.ASN).filter(
     ).all()
     
@@ -61,7 +68,7 @@ def save_asn(db, PostASN, userId):
         resp = sap.call_create_asn_api(payload)
         print(resp)
         if(resp['success']):
-           get_asn.status= "completed"
+           get_asn.status= "pending"
            get_asn.inv_no = PostASN.invoice_no
            get_asn.inv_value = PostASN.invoice_value
            get_asn.asn_no = resp['field1']
@@ -71,3 +78,19 @@ def save_asn(db, PostASN, userId):
            db.commit()
            db.refresh(get_asn)
            return True
+
+def add_logistic(db: Session, logistic, userId:str):
+        asn_data = db.query(models.ASN).filter(
+        models.ASN.id == logistic.id
+    ).first()
+        if asn_data !=None:
+            asn_data.tracking_Id = generate_random_tracking_no()
+            asn_data.logistic_vendor =logistic.vendor_id
+            asn_data.logistic_created_by= userId
+            asn_data.status ="in-transit"
+            db.commit()
+            db.flush()
+            db.refresh(asn_data)
+            return 200
+        
+        

@@ -17,6 +17,7 @@ class Item(BaseModel):
     plant_code: str
     vendor_code: str
     vendor_name: str
+    
 
 
 class CreateASN(BaseModel):
@@ -47,3 +48,8 @@ class PostASN(BaseModel):
     eta: str
     etd: str
     del_qty: str
+
+
+class AddLogistics(BaseModel):
+    id: str
+    vendor_id: str

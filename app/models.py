@@ -7,6 +7,11 @@ class User(Base):
     id = Column(Integer(), primary_key=True)
     userId = Column(String())
     password = Column(String())
+    role = Column(String())
+    email = Column(String())
+    name = Column(String())
+    created_date = Column(Date(), default=func.now())
+
 
 
 class ASN(Base):
@@ -29,6 +34,9 @@ class ASN(Base):
     plant_code = Column(String())
     vendor_name = Column(String())
     vendor_code = Column(String())
+    tracking_Id = Column(String())
+    logistic_vendor = Column(String())
+    logistic_created_by = Column(String())
     created_date = Column(Date(), default=func.now())
 
 class Issue(Base):

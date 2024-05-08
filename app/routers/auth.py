@@ -34,7 +34,6 @@ def raise_authentication_exception(required_scopes, detail):
         headers={"WWW-Authenticate": www_authenticate},
     )
 
-
 def authorized_user(
     req: Request,
     required_scopes: SecurityScopes,
@@ -77,6 +76,11 @@ def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session
         raise HTTPException(status_code=400, detail="invalid user")
     response = service_auth.authenticate(db, form_data.username, form_data.password)
     if response:
+        db_user.role = response['data'][0]['role']
+        db_user.email = response['data'][0]['email']
+        db_user.name = response['data'][0]['name']
+        db.commit()
+        db.refresh(db_user)
         return LoginResponse(
             access_token= service_auth.create_access_token(db_user, response['data'][0]['email'], form_data.scopes),
             role=response['data'][0]['role'],
