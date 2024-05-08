@@ -6,7 +6,10 @@ from app.internal import security
 def create_user(db: Session, user: CreateUser):
     db_user = models.User(
         userId= user.userId,
-        password=security.get_password_hash(user.password)
+        password=security.get_password_hash(user.password),
+        email= user.email,
+        role= user.role,
+        name= user.name
     )
     db.add(db_user)
     db.flush()
