@@ -20,7 +20,7 @@ def get_asn(db: Session = Depends(get_db), current_user: User = Depends(auth.aut
         userId= current_user.userId
         return service_asn.get_all_asn(db, userId)
     else:
-        return service_asn.get_all_asn_buyer() 
+        return service_asn.get_all_asn_buyer(db) 
 
 
 @router.post("/submit_asn")
