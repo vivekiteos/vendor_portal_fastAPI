@@ -67,4 +67,15 @@ class IssueComments(Base):
     created_date = Column(Date(), default=func.now())
 
 
+class Inventory(Base):
+    __tablename__ = "inventory"
+    id = Column(Integer(), primary_key=True)
+    userId = Column(String())
+    mat_code_supplier = Column(String())
+    mat_code_buyer = Column(String())
+    description = Column(String())
+    qty = Column(Integer())
+    uom = Column(String())
+    created_date = Column(Date(), default=func.now())
+
 Base.metadata.create_all(bind=engine)

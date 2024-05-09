@@ -8,7 +8,8 @@ from app.routers import (
     po,
     asn,
     issue,
-    master
+    master,
+    inventory
 )
 
 app = FastAPI()
@@ -48,6 +49,10 @@ auth_routes.include_router(
 
 auth_routes.include_router(
     issue.router,prefix="/issue",tags=["ISSUE"]
+)
+
+auth_routes.include_router(
+    inventory.router,prefix="/inventory",tags=["INVENTORY"]
 )
 
 routes.include_router(

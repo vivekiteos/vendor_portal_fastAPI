@@ -12,3 +12,8 @@ class CreateUser(UserBase):
 
 class User(UserBase):
     id: int
+
+
+class ChangePassword(BaseModel):
+    current_password: str
+    new_password: str

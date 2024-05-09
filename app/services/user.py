@@ -21,3 +21,15 @@ def get_user_by_user_id(db: Session, userId: str):
     return db.query(models.User).filter(
         models.User.userId == userId
     ).first()
+
+def get_user_by_user_id_password(db: Session, userId: str, password: str):
+    return db.query(models.User).filter(
+        models.User.userId == userId,
+        models.User.password == password
+    ).first()
+
+def update_password(db: Session, user, new_password: str):
+    user.password = security.get_password_hash(new_password)
+    db.commit()
+    db.refresh(user)
+    return user
