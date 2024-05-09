@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class InventoryBase(BaseModel):
     mat_code_supplier: str
-    mat_code_buyer: str
+    mat_code_customer: str
     description: str
     qty: int
     uom: str

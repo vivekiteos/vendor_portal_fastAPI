@@ -72,7 +72,7 @@ class Inventory(Base):
     id = Column(Integer(), primary_key=True)
     userId = Column(String())
     mat_code_supplier = Column(String())
-    mat_code_buyer = Column(String())
+    mat_code_customer = Column(String())
     description = Column(String())
     qty = Column(Integer())
     uom = Column(String())

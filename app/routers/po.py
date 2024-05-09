@@ -7,10 +7,11 @@ router = APIRouter()
 
 @router.get("")
 def open_po(current_user: User = Depends(auth.authorized_user)):
-    if current_user.role.lower() =="vendor":
+    if current_user.role.lower() == "buyer":
+        return service_po.get_open_buyer()
+    else:
         vendor_id =current_user.userId
         return service_po.get_open_po(vendor_id)
-    else:
-        return service_po.get_open_buyer()
+        
 
     

@@ -10,7 +10,7 @@ def create_inv(db: Session, inventories: Createinventory, userId):
         db_inv = models.Inventory(
             userId=userId,
             mat_code_supplier=inv.mat_code_supplier,
-            mat_code_buyer=inv.mat_code_buyer,
+            mat_code_customer=inv.mat_code_customer,
             description=inv.description,
             qty=inv.qty,
             uom=inv.uom
