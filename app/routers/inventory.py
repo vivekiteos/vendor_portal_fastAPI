@@ -15,10 +15,10 @@ def create_inventory(Createinventory: Createinventory, db: Session = Depends(get
 
 
 @router.get("")
-def get_inv(current_user: User = Depends(auth.authorized_user)):
+def get_inv(db: Session = Depends(get_db), current_user: User = Depends(auth.authorized_user)):
     if current_user.role.lower() =="vendor":
         vendor_id =current_user.userId
-        return service_inventory.get_inv_vendor(vendor_id)
+        return service_inventory.get_inv_vendor(db, vendor_id)
     else:
         return None
 
