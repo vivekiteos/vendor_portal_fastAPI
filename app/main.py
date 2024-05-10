@@ -18,6 +18,7 @@ app = FastAPI()
 origins =[
     "https://vendorportal-new.vercel.app",
     "http://182.16.16.24:8089",
+    "http://localhost:3000",
     "http://localhost:5173"
 ]
 
