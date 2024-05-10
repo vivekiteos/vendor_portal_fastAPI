@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app import models
 from app.schemas.inventory import Createinventory
 from app.internal import security
+from datetime import date
 
 def create_inv(db: Session, inventories: Createinventory, userId):
     for inv in inventories.data:
@@ -22,7 +23,8 @@ def create_inv(db: Session, inventories: Createinventory, userId):
     return "Inventory items created successfully"
 
 def get_inv_vendor(db: Session, userId: str):
+    current_date = date.today()
     return db.query(models.Inventory).filter(
-        models.Inventory.userId == userId
-        # models.Inventory.created_date == func.now()
+        models.Inventory.userId == userId,
+        func.DATE(models.Inventory.created_date) == current_date
     ).all()
