@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     TOKEN_URL: str ="auth"
-    JWT_EXPIRY_MINUTES: int = 1
+    JWT_EXPIRY_MINUTES: int = 120
     SCOPES: dict ={
         "me": "Read and write access t user's data",
     }
