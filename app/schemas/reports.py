@@ -8,9 +8,9 @@ class suppliedMaterial(BaseModel):
 class issueTracker(BaseModel):
     open: str
     close: str
-    high: str
-    medium: str
-    low: str
+    # high: str
+    # medium: str
+    # low: str
 
 class accountDetails(BaseModel):
     open_value: str
