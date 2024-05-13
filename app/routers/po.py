@@ -17,12 +17,12 @@ def open_po(db: Session = Depends(get_db), current_user: User = Depends(auth.aut
     po_items = po_data['data']
     items_to_remove: List[int] = []
     for index, item in enumerate(po_items):
-        is_found = get_asn_by_po_no(db, item["ebeln"])
+        is_found = get_asn_by_po_no(db, item["ebeln"], item["matnr"])
         if is_found:
             items_to_remove.append(index)
     for index in reversed(items_to_remove):
         po_items.pop(index)
-        
+
     return ResponseModel(
             success=po_data['success'],
             msg=po_data['msg'],

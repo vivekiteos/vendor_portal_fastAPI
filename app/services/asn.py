@@ -21,9 +21,10 @@ def get_asn_row(db, id):
         models.ASN.id == id
     ).first()
 
-def get_asn_by_po_no(db, po_no):
+def get_asn_by_po_no(db, po_no, matnr):
     return db.query(models.ASN).filter(
-        models.ASN.po_no == po_no
+        models.ASN.po_no == po_no,
+        models.ASN.mat_code == matnr
     ).first()
 
 def po_to_asn(db: Session, createASN, userId:str):
