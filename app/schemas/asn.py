@@ -41,13 +41,17 @@ class SubmitASN(BaseModel):
     invoice: str
     data: List[ASNItem]
 
+
+class Row_Items(BaseModel):
+    id: int
+    del_qty: int
+
 class PostASN(BaseModel):
     invoice_no: str
     invoice_value: str
-    id: int
     eta: str
     etd: str
-    del_qty: str
+    data: List[Row_Items]
 
 
 class AddLogistics(BaseModel):

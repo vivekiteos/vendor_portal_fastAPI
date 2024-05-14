@@ -51,39 +51,46 @@ def po_to_asn(db: Session, createASN, userId:str):
     return 200
 
 def save_asn(db, PostASN, userId):
-    get_asn = get_asn_row(db, PostASN.id)
-    if(get_asn != None):
+    payload_data = []
+    for item in PostASN.data:
+        get_asn = get_asn_row(db, item.id)
+        if get_asn is not None:
+            payload_data.append({
+                "LIFNR": userId,
+                "EBELN": get_asn.po_no,
+                "EBELP": get_asn.item_no,
+                "MENGE": get_asn.open_qty,
+                "MATNR": get_asn.mat_code,
+                "EINDT": PostASN.etd,
+                "NETPR": PostASN.invoice_value,
+                "MENE1": item.del_qty,
+                "MAKTX": get_asn.mat_desc,
+                "ETA": PostASN.eta,
+                "ETD": PostASN.etd
+            })
+    if payload_data:
         payload = {
             "INVOICE": PostASN.invoice_no,
-            "DATA": [
-                {
-                    "LIFNR": userId,
-                    "EBELN": get_asn.po_no,
-                    "EBELP": get_asn.item_no,
-                    "MENGE": get_asn.open_qty,
-                    "MATNR": get_asn.mat_code,
-                    "EINDT": PostASN.etd,
-                    "NETPR": PostASN.invoice_value,
-                    "MENE1": PostASN.del_qty,
-                    "MAKTX": get_asn.mat_desc,
-                    "ETA": PostASN.eta,
-                    "ETD": PostASN.etd
-                }
-            ]
+            "DATA": payload_data
         }
         resp = sap.call_create_asn_api(payload)
-        print(resp)
-        if(resp['success']):
-           get_asn.status= "pending"
-           get_asn.inv_no = PostASN.invoice_no
-           get_asn.inv_value = PostASN.invoice_value
-           get_asn.asn_no = resp['field1']
-           get_asn.del_qty = PostASN.del_qty
-           get_asn.eta= PostASN.eta
-           get_asn.etd= PostASN.etd
-           db.commit()
-           db.refresh(get_asn)
-           return True
+        if resp['success']:
+            for idx, item in enumerate(PostASN.data):  # Loop through PostASN.data again
+                get_asn = get_asn_row(db, item.id)
+                if get_asn is not None:
+                    get_asn.status = "pending"
+                    get_asn.inv_no = PostASN.invoice_no
+                    get_asn.inv_value = PostASN.invoice_value
+                    get_asn.asn_no = resp['field1']
+                    get_asn.del_qty = item.del_qty  # Use item.del_qty from PostASN.data
+                    get_asn.eta = PostASN.eta
+                    get_asn.etd = PostASN.etd
+                    db.commit()
+                    db.refresh(get_asn)
+            return True
+    return False
+
+    
 
 def add_logistic(db: Session, logistic, userId:str):
         asn_data = db.query(models.ASN).filter(
