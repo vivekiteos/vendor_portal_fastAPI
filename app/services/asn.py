@@ -14,6 +14,7 @@ def get_all_asn(db, userId):
 
 def get_all_asn_buyer(db):
     return db.query(models.ASN).filter(
+        models.ASN.po_no != None
     ).all()
     
 def get_asn_row(db, id):
