@@ -6,7 +6,7 @@ GET_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asnget?sap-client=8
 CREATE_ASN_API_URL='http://195.234.214.189:8000/sap/bc/zsicf_vs_asn_c?sap-client=800'
 
 SAP_AUTH_USER_ID ='user07'
-SAP_AUTH_PASS ='MSPG@0424'
+SAP_AUTH_PASS ='MSPG@0724'
 
 def call_Login_api(userId):
     print(userId)
