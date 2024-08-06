@@ -72,9 +72,11 @@ def authorized_user(
 @router.post("")
 def auth(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session = Depends(get_db)) -> LoginResponse:
     db_user = service_users.get_user_by_user_id(db, form_data.username)
+    print(db_user)
     if db_user is None:
         raise HTTPException(status_code=400, detail="invalid user")
     response = service_auth.authenticate(db, form_data.username, form_data.password)
+    print(response)
     if response:
         db_user.role = response['data'][0]['role']
         db_user.email = response['data'][0]['email']

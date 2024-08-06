@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     SCOPES: dict ={
         "me": "Read and write access t user's data",
     }
-    SQLALCHEMY_DATABASE_URI: str ="postgresql://user1:ZnRc5zzfQgvZmygRep5zLxBqJT08iVal@dpg-cotnbjv109ks73aoekgg-a.oregon-postgres.render.com/vdb_c3on"
+    SQLALCHEMY_DATABASE_URI: str ="postgresql://vp:Its2023@182.16.16.26/vendor_portal"
+    #SQLALCHEMY_DATABASE_URI: str ="postgresql://user1:ZnRc5zzfQgvZmygRep5zLxBqJT08iVal@dpg-cotnbjv109ks73aoekgg-a.oregon-postgres.render.com/vdb_c3on"
 
 settings= Settings()
